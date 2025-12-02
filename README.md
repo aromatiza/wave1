@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WAVE — Organigramme du Club</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .logo-container {
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: center;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .logo-badge {
+      width: 160px;
+      height: 160px;
+      border-radius: 24px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(245,250,245,0.9));
+      box-shadow: 0 10px 30px rgba(16, 64, 32, 0.08), inset 0 1px 0 rgba(255,255,255,0.6);
+      border: 1px solid rgba(20,80,40,0.06);
+    }
+
+    .logo-badge img {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .logo-svg {
+      filter: drop-shadow(0 8px 16px rgba(30, 132, 73, 0.12));
+    }
+
+    .logo-img {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 18px rgba(16, 64, 32, 0.12));
+    }
+
+    header h1 {
+      font-size: 38px;
+      color: #0A3D62;
+      font-weight: 800;
+      margin-bottom: 6px;
+      letter-spacing: -0.5px;
+    }
+
+    header p {
+      color: #4b5563;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .chart {
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+
+    .section {
+      background: linear-gradient(180deg, #ffffff 0%, #fbfdfb 100%);
+      border-radius: 14px;
+      padding: 28px;
+      box-shadow: 0 6px 20px rgba(16, 64, 32, 0.06), 0 2px 6px rgba(0,0,0,0.03);
+      transition: box-shadow 0.28s cubic-bezier(0.2, 0.9, 0.2, 1), transform 0.18s ease;
+    }
+
+    .section:hover {
+      box-shadow: 0 18px 36px rgba(16, 64, 32, 0.10);
+      transform: translateY(-4px);
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0A3D62;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #EEF5F0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-title::before {
+      content: '';
+      width: 4px;
+      height: 24px;
+      background: linear-gradient(180deg, #1E8449, #0A3D62);
+      border-radius: 2px;
+    }
+
+    /* icon used beside titles */
+    .icon {
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 8px;
+      color: #1E8449;
+    }
+
+    /* subtle page background texture */
+    body {
+      background-color: #f7faf7;
+      background-image: radial-gradient(circle at 10% 10%, rgba(34,139,34,0.02) 0px, transparent 40px), repeating-linear-gradient(45deg, rgba(0,0,0,0.01) 0 2px, transparent 2px 8px);
+    }
+
+    .roles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .role-card {
+      background: linear-gradient(180deg, #ffffff 0%, #f8fdf8 100%);
+      border: 1px solid rgba(16,64,32,0.06);
+      border-radius: 12px;
+      padding: 16px 18px;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .role-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #1E8449, #F39C12);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .role-card:hover {
+      border-color: rgba(30,132,73,0.14);
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 12px 28px rgba(16, 64, 32, 0.08);
+    }
+
+    .role-card:hover::before {
+      opacity: 1;
+    }
+
+    .role-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #0A3D62;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .role-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1E8449;
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      transform: translateY(8px);
+      min-height: 26px;
+    }
+
+    .role-card.active .role-name {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .role-placeholder {
+      font-size: 16px;
+      color: #d1d5db;
+      font-style: italic;
+      opacity: 1;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      transform: translateY(0);
+    }
+
+    .role-card.active .role-placeholder {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+
+    .subsection {
+      margin-top: 24px;
+      padding-left: 20px;
+      border-left: 2px solid #E9F0F2;
+    }
+
+    .subsection-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .subsection .roles-grid {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .subsection .role-card {
+      background: linear-gradient(135deg, #fafbfc 0%, #f5f7fa 100%);
+      border-color: #f0f0f0;
+    }
+
+    /* iOS-style ripple effect on click */
+    @keyframes ripple {
+      0% {
+        width: 0;
+        height: 0;
+        opacity: 0.6;
+      }
+      100% {
+        width: 300px;
+        height: 300px;
+        opacity: 0;
+      }
+    }
+
+    .role-card::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(30, 132, 73, 0.2);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .role-card.clicked::after {
+      animation: ripple 0.6s ease-out;
+    }
+
+    /* Smooth reveal animation */
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section {
+      animation: slideIn 0.5s ease-out both;
+    }
+
+    .section:nth-child(1) { animation-delay: 0.1s; }
+    .section:nth-child(2) { animation-delay: 0.2s; }
+    .section:nth-child(3) { animation-delay: 0.3s; }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 28px;
+      }
+
+      .section {
+        padding: 20px;
+      }
+
+      .roles-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .chart {
+        gap: 24px;
+      }
+      .logo-badge { width: 108px; height: 108px; border-radius: 18px; }
+      .logo-img { width: 88px; height: 88px; }
+      .roles-grid { gap: 12px; }
+      .role-card { padding: 14px; min-height: 72px; }
+      .role-title { font-size: 12px; }
+      .role-name { font-size: 16px; }
+      .section { padding: 18px; }
+      .section-title { font-size: 16px; }
+      body { padding: 18px 12px; }
+    }
+
+    /* Touch-friendly improvements */
+    .role-card { -webkit-tap-highlight-color: rgba(0,0,0,0); touch-action: manipulation; }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- SVG icon sprite (hidden) -->
+    <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <symbol id="icon-camera" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M4 7h3l2-2h6l2 2h3v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7zm8 3a4 4 0 1 0 .001 8.001A4 4 0 0 0 12 10z"/>
+      </symbol>
+      <symbol id="icon-box" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M21 8l-9-5-9 5v8a2 2 0 0 0 1 1.732V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1.268A2 2 0 0 0 21 16V8zM12 3.18L18.74 7 12 10.82 5.26 7 12 3.18z"/>
+      </symbol>
+      <symbol id="icon-people" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M16 11a4 4 0 1 0-8 0 4 4 0 0 0 8 0zM2 20v-1a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v1H2zM20 8a3 3 0 1 1 0 6 3 3 0 0 1 0-6zM18 17v-1a3 3 0 0 1 3-3h1v4h-4z"/>
+      </symbol>
+      <symbol id="icon-handshake" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M21.7 13.35l-3.05-2.02a1 1 0 0 0-1.12.04l-2.3 1.85 1.35 1.01 2.3-1.85 2.47 1.64a1 1 0 0 0 1.4-.29 1 1 0 0 0-.05-1.38zM12 2a2 2 0 0 0-2 2v2.6L6 12l2 1.33L14 9V4a2 2 0 0 0-2-2zM2 13.5v3a2.5 2.5 0 0 0 2.5 2.5H9v-3.5L6 13.5H2z"/>
+      </symbol>
+      <symbol id="icon-briefcase" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M10 2H14a2 2 0 0 1 2 2v2h3a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3V4a2 2 0 0 1 2-2h2zM8 8h8V6H8v2z"/>
+      </symbol>
+    </svg>
+    <header>
+      <div class="logo-container">
+        <div class="logo-badge" aria-hidden="false">
+          <img 
+  src="Logo WAVE _ Vision et Excellence.png"
+  alt="WAVE Logo" 
+  class="logo-img"
+/>
+            <title>WAVE — Vision & Excellence</title>
+            <rect width="100%" height="100%" fill="none" />
+            <g transform="translate(400,260)">
+              <g transform="translate(0,-20)">
+                <path d="M-40,-140 C-10,-160 30,-150 70,-90 C90,-60 80,-40 60,-20 C20,20 -20,10 -40,-20 C-60,-60 -60,-100 -40,-140 Z" fill="#66A84F"/>
+                <path d="M-40,0 C-10,-20 10,-30 40,-10" fill="none" stroke="#2D6B35" stroke-width="18" stroke-linecap="round"/>
+                <path d="M40,0 C10,20 -10,30 -40,10" fill="none" stroke="#66A84F" stroke-width="18" stroke-linecap="round"/>
+                <path d="M-10,-10 L30,-10" stroke="#2D6B35" stroke-width="10" stroke-linecap="round"/>
+                <path d="M-30,10 L10,10" stroke="#2D6B35" stroke-width="10" stroke-linecap="round"/>
+              </g>
+            </g>
+            <text x="400" y="560" font-family="Segoe UI, Roboto, Arial, sans-serif" font-size="64" font-weight="700" fill="#123F2A" text-anchor="middle">WAVE</text>
+          </svg>
+        </div>
+      </div>
+      <h1>WAVE Organigramme</h1>
+      <p>Vision Agro et d'Excellence</p>
+    </header>
+
+    <div class="chart">
+      <!-- PRINCIPAL -->
+      <div class="section">
+        <h2 class="section-title">Bureau Principal</h2>
+        <div class="roles-grid">
+          <div class="role-card">
+            <div class="role-title">Présidente</div>
+            <div class="role-name">Zineb</div>
+            <div class="role-placeholder">Cliquez pour voir</div>
+          </div>
+          <div class="role-card">
+            <div class="role-title">Vice-présidente</div>
+            <div class="role-name">Safae</div>
+            <div class="role-placeholder">Cliquez pour voir</div>
+          </div>
+          <div class="role-card">
+            <div class="role-title">Secrétaire</div>
+            <div class="role-name">Khawla</div>
+            <div class="role-placeholder">Cliquez pour voir</div>
+          </div>
+          <div class="role-card">
+            <div class="role-title">Animation</div>
+            <div class="role-name">—</div>
+            <div class="role-placeholder">À assigner</div>
+          </div>
+          <div class="role-card">
+            <div class="role-title">Trésorière</div>
+            <div class="role-name">Hajar</div>
+            <div class="role-placeholder">Cliquez pour voir</div>
+          </div>
+          <div class="role-card">
+            <div class="role-title">Communication</div>
+            <div class="role-name">Kassam</div>
+            <div class="role-placeholder">Cliquez pour voir</div>
+          </div>
+        </div>
+
+        <!-- Sous-pôle Photo – Média – Vidéo -->
+        <div class="subsection">
+          <span class="subsection-title"><svg class="icon" viewBox="0 0 24 24"><use href="#icon-camera" xlink:href="#icon-camera"></use></svg> Sous-pôle Photo – Média – Vidéo</span>
+          <div class="roles-grid">
+            <div class="role-card">
+              <div class="role-title">Développement Web</div>
+              <div class="role-name">Mohammed</div>
+              <div class="role-placeholder">Cliquez pour voir</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ORGANISATION -->
+      <div class="section">
+        <h2 class="section-title">Pôle Organisation</h2>
+        <div class="roles-grid">
+          <div class="role-card">
+            <div class="role-title">Manager Agro</div>
+            <div class="role-name">Imane</div>
+            <div class="role-placeholder">Cliquez pour voir</div>
+          </div>
+          <div class="role-card">
+            <div class="role-title">Manager Biotech</div>
+            <div class="role-name">Hasnae</div>
+            <div class="role-placeholder">Cliquez pour voir</div>
+          </div>
+          <div class="role-card">
+            <div class="role-title">Responsable Évènements</div>
+            <div class="role-name">Omayma</div>
+            <div class="role-placeholder">Cliquez pour voir</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LOGISTIQUE ET AUTRES -->
+      <div class="section">
+        <h2 class="section-title">Teams & Responsabilités</h2>
+
+        <!-- Logistique -->
+        <div class="subsection">
+          <span class="subsection-title"><svg class="icon" viewBox="0 0 24 24"><use href="#icon-box" xlink:href="#icon-box"></use></svg> Logistique</span>
+          <div class="roles-grid">
+            <div class="role-card">
+              <div class="role-title">Team Leader</div>
+              <div class="role-name">Mohammed</div>
+              <div class="role-placeholder">Cliquez pour voir</div>
+            </div>
+            <div class="role-card">
+              <div class="role-title">Vice Team Leader</div>
+              <div class="role-name">—</div>
+              <div class="role-placeholder">À choisir</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sociale -->
+        <div class="subsection">
+          <span class="subsection-title"><svg class="icon" viewBox="0 0 24 24"><use href="#icon-people" xlink:href="#icon-people"></use></svg> Sociale</span>
+          <div class="roles-grid">
+            <div class="role-card">
+              <div class="role-title">Team Leader</div>
+              <div class="role-name">Salwa</div>
+              <div class="role-placeholder">Cliquez pour voir</div>
+            </div>
+            <div class="role-card">
+              <div class="role-title">Vice Team Leader</div>
+              <div class="role-name">—</div>
+              <div class="role-placeholder">À choisir</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Partenariat -->
+        <div class="subsection">
+          <span class="subsection-title"><svg class="icon" viewBox="0 0 24 24"><use href="#icon-handshake" xlink:href="#icon-handshake"></use></svg> Partenariat</span>
+          <div class="roles-grid">
+            <div class="role-card">
+              <div class="role-title">Team Leader</div>
+              <div class="role-name">Asmae</div>
+              <div class="role-placeholder">Cliquez pour voir</div>
+            </div>
+            <div class="role-card">
+              <div class="role-title">Vice Team Leader</div>
+              <div class="role-name">—</div>
+              <div class="role-placeholder">À choisir</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RH -->
+        <div class="subsection">
+          <span class="subsection-title"><svg class="icon" viewBox="0 0 24 24"><use href="#icon-briefcase" xlink:href="#icon-briefcase"></use></svg> Ressources Humaines</span>
+          <div class="roles-grid">
+            <div class="role-card">
+              <div class="role-title">Responsable RH</div>
+              <div class="role-name">—</div>
+              <div class="role-placeholder">À assigner</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer style="margin-top:40px; text-align:center; color:#6b7280; font-size:13px;">
+    <div style="opacity:0.9; margin-bottom:8px;">
+      <strong style="color:#163a29;">WAVE</strong> — Vision Agro et d'Excellence
+    </div>
+    <div style="display:flex; gap:12px; justify-content:center; align-items:center; font-size:12px;">
+      <span>Contact: <a href="mailto:contact@wave.club" style="color:#1E8449; text-decoration:none;">contact@wave.club</a></span>
+      <span style="color:#d1d5db">•</span>
+      <span>Instagram: <em style="color:#1E8449">@wave_club</em></span>
+    </div>
+  </footer>
+
+    <script>
+    function toggleRole(card) {
+      // Remove ripple class to allow re-animation
+      card.classList.remove('clicked');
+      
+      // Trigger ripple animation
+      void card.offsetWidth; // Reflow trick to restart animation
+      card.classList.add('clicked');
+
+      // Toggle active state
+      card.classList.toggle('active');
+    }
+
+    // Auto-close cards when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.role-card')) {
+        document.querySelectorAll('.role-card.active').forEach(card => {
+          card.classList.remove('active');
+        });
+      }
+    });
+
+    // Attach unified click + keyboard handlers for accessibility and mobile reliability
+    (function attachCardHandlers(){
+      const cards = Array.from(document.querySelectorAll('.role-card'));
+      cards.forEach(c => {
+        c.setAttribute('tabindex', '0');
+        c.addEventListener('click', (ev) => { ev.stopPropagation(); toggleRole(c); });
+        c.addEventListener('keydown', (ev) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); toggleRole(c); } });
+      });
+    })();
+  </script>
+</body>
+</html>
